@@ -33,6 +33,7 @@ public class RandomStartingItemsEvent {
                     List<? extends Integer> quantityList = RandomStartingItemsConfig.quantity.get();
                     int NumOfItem = RandomStartingItemsConfig.num_roll.get();
                     int RNGControl = RandomStartingItemsConfig.rng_control.get();
+                    boolean excludeItem = RandomStartingItemsConfig.exclude_rng_control_items.get();
                     if (RNGControl > 0){
                         for (int i = 0; i < RNGControl; i++){
                             givePlayerItem(player, itemList.get(i), quantityList.get(i));
@@ -40,10 +41,14 @@ public class RandomStartingItemsEvent {
                         NumOfItem = NumOfItem - RNGControl;
                     }
                     if (NumOfItem > 0){
+                        int adjustValue = 0;
+                        if (excludeItem){
+                            adjustValue = RNGControl;
+                        }
                         Random roll = new Random();
                         int rollResult;
                         for (int i = 0; i < NumOfItem; i++){
-                            rollResult = roll.nextInt(itemList.size());
+                            rollResult = roll.nextInt(itemList.size() - adjustValue) + adjustValue;
                             givePlayerItem(player, itemList.get(rollResult), quantityList.get(rollResult));
                         }
                     }

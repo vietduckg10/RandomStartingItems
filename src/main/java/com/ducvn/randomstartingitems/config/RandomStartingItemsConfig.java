@@ -13,6 +13,7 @@ public class RandomStartingItemsConfig {
     public static final ForgeConfigSpec.ConfigValue<List<? extends Integer>> quantity;
     public static final ForgeConfigSpec.ConfigValue<Integer> num_roll;
     public static final ForgeConfigSpec.ConfigValue<Integer> rng_control;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> exclude_rng_control_items;
 
     static {
         BUILDER.push("Random Starting Items Config");
@@ -27,6 +28,8 @@ public class RandomStartingItemsConfig {
                 .define("Roll", 5);
         rng_control = BUILDER.comment("Items player always get. Example: 2 will give player the first 2 items in pool, default: 0")
                 .define("RNG_Control", 0);
+        exclude_rng_control_items = BUILDER.comment("Exclude RNG Control items from items pool")
+                        .define("Exclude", false);
 
         BUILDER.pop();
         SPEC = BUILDER.build();
