@@ -34,7 +34,7 @@ public class RandomStartingItemsEvent {
                     int NumOfItem = RandomStartingItemsConfig.num_roll.get();
                     int RNGControl = RandomStartingItemsConfig.rng_control.get();
                     boolean excludeItem = RandomStartingItemsConfig.exclude_rng_control_items.get();
-                    if (RNGControl > 0){
+                    if (RNGControl > 0 && !excludeItem){
                         for (int i = 0; i < RNGControl; i++){
                             givePlayerItem(player, itemList.get(i), quantityList.get(i));
                         }
